@@ -14,14 +14,14 @@ function saveTeam(data, path) {
 }
 
 crudRoutes.get('/teams', (req, res) => {
-  res.render('home', {
-    layout: 'teams',
+  res.render('teams', {
+    layout: 'main',
   });
 });
 
 crudRoutes.get('/teams/addteam', (req, res) => {
-  res.render('home', {
-    layout: 'createTeamForm',
+  res.render('createteamform', {
+    layout: 'main',
   });
 });
 module.exports = crudRoutes;
