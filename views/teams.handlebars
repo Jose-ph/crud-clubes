@@ -1,25 +1,33 @@
-<h1>HOLA AQUÌ APARECERAN LOS EQUIPOS</h1>
-{{#each data.teams as |team|}}
+<h1>Equipos de la Premier League</h1>
+{{!-- {{#each data.teams as |team|}}
   <li>Team: {{team.name}}</li>
-{{/each}}
+{{/each}} --}}
 
-<table class="table">
+<table class="table table-dark">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre Equipo</th>
+      <th scope="col">País</th>
+      <th scope="col">Acción</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+    {{#each data.teams as |team|}}
+        <tr>
+      <th scope="row"id={{team.id}}>{{team.id}}</th>
+      <td>{{team.crestUrl}}/// {{team.name}}</td>
+      <td>{{team.area.name}}</td>
+      <td> <button class="btn btn-warning">Ver</button>
+     <button  class="btn btn-warning">Editar</button>
+      <button  class="btn btn-warning">Eliminar</button> 
+
+      </td>
     </tr>
-    <tr>
+   
+{{/each}}
+
+    {{!-- <tr>
       <th scope="row">2</th>
       <td>Jacob</td>
       <td>Thornton</td>
@@ -29,6 +37,6 @@
       <th scope="row">3</th>
       <td colspan="2">Larry the Bird</td>
       <td>@twitter</td>
-    </tr>
+    </tr> --}}
   </tbody>
 </table>
