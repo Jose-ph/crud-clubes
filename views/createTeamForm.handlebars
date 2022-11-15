@@ -1,4 +1,4 @@
-<form action="/teams/addteam" method="post">
+{{!-- <form action="/teams/addteam" method="post">
          <label for="newId">ID:</label>
   <input id="newId" type="number" name="newId">
   
@@ -6,35 +6,68 @@
 
 
 
-</form>
-<form>
+</form> --}}
+<div class="container">
+
+<form action="/teams/addteam" method="post" enctype="multipart/form-data">
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    <label for="team-id" class="form-label">ID:</label>
+    <input type="number" class="form-control" id="team-id" name="team-id">
+   
   </div>
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <label for="team-name" class="form-label">Team name:</label>
+    <input type="text" class="form-control" id="team-name" name="team-name">
   </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+   <div class="mb-3">
+    <label for="team-name-short" class="form-label">shortName:</label>
+    <input type="text" class="form-control" id="team-name-short" name="team-name-short">
+  </div>
+    <div class="mb-3">
+    <label for="team-tla" class="form-label">tla:</label>
+    <input type="text" class="form-control" id="team-tla" name="team-tla">
+  </div>
+     <div class="mb-3">
+    <label for="image" class="form-label">SUBIR IMAGEN</label>
+    <input type="file" class="form-control" id="image" name="image">
+  </div>
+     <div class="mb-3">
+    <label for="team-address" class="form-label">Team Address:</label>
+    <input type="text" class="form-control" id="team-address" name="team-address">
+  </div>
+     <div class="mb-3">
+    <label for="team-phone" class="form-label">Team Phone:</label>
+    <input type="number" class="form-control" id="team-phone" name="team-phone">
+  </div>
+    <div class="mb-3">
+    <label for="team-website" class="form-label">Team website:</label>
+    <input type="text" class="form-control" id="team-website" name="team-website">
+  </div>
+  <div class="mb-3">
+    <label for="team-email" class="form-label">Team email:</label>
+    <input type="email" class="form-control" id="team-email" name="team-email">
+  </div>
+  <div class="mb-3">
+    <label for="team-founded-date" class="form-label">Team founded:</label>
+    <input type="date" class="form-control" id="team-founded-date" name="team-founded-date">
+  </div>
+   <div class="mb-3">
+    <label for="team-colors" class="form-label">Team colors:</label>
+    <input type="text" class="form-control" id="team-colors" name="team-colors">
+  </div>
+   <div class="mb-3">
+    <label for="team-venue" class="form-label">Team venue:</label>
+    <input type="text" class="form-control" id="team-venue" name="team-venue">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 
- "id": 57,
-    "area": { "id": 2072, "name": "England" },
-    "name": "Arsenal FC",
-    "shortName": "Arsenal",
-    "tla": "ARS",
-    "crestUrl": "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
-    "address": "75 Drayton Park London N5 1BU",
-    "phone": "+44 (020) 76195003",
-    "website": "http://www.arsenal.com",
-    "email": "info@arsenal.co.uk",
-    "founded": 1886,
-    "clubColors": "Red / White",
-    "venue": "Emirates Stadium",
-    "lastUpdated": "2020-05-14T02:41:34Z"
+
+{{!--  
+search how to add this data
+"area": { "id": 2072, "name": "England" },
+ "lastUpdated": "2020-05-14T02:41:34Z"
+
+ --}}
+
