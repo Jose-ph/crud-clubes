@@ -18,8 +18,13 @@ function saveTeam(data, path) {
 // crudRoutes.use(express.json());
 crudRoutes.use(express.urlencoded({ extended: true }));
 crudRoutes.get('/teams', (req, res) => {
+  const teams = getTeams(teamsPath);
+
   res.render('teams', {
     layout: 'main',
+    data: {
+      teams,
+    },
   });
 });
 

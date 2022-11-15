@@ -1,4 +1,7 @@
 <h1>HOLA AQUÌ APARECERAN LOS EQUIPOS</h1>
+{{#each data.teams as |team|}}
+  <li>Team: {{team.name}}</li>
+{{/each}}
 
 <table class="table">
   <thead>
