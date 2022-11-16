@@ -11,9 +11,12 @@ function getTeams(path) {
   const teamsData = fs.readFileSync(path);
   return JSON.parse(teamsData);
 }
-function saveTeam(data, path) {
-  const stringifyData = JSON.stringify(data);
-  fs.writeFileSync(path, data);
+function saveTeam(data, path, previousData) {
+  previousData.push(data);
+  const newData = previousData;
+  const stringifyData = JSON.stringify(newData);
+
+  fs.writeFileSync(path, stringifyData);
 }
 // crudRoutes.use(express.json());
 crudRoutes.use(express.urlencoded({ extended: true }));
@@ -24,6 +27,8 @@ crudRoutes.get('/', (req, res) => {
     layout: 'main',
     data: {
       teams,
+      teamsQuantity: teams.length,
+
     },
   });
 });
@@ -34,12 +39,13 @@ crudRoutes.get('/teams/addteam', (req, res) => {
   });
 });
 crudRoutes.post('/teams/addteam', upload.single('image'), (req, res) => {
-  const newTeamDefault = req.body;
-  newTeamDefault.area = { id: 2072, name: 'England' };
-  newTeamDefault.lastUpdated = new Date();
-  console.log(newTeamDefault);
-  // console.log('Este es el archivo subido', req.file);
-  // console.log(req.body);
-  res.status(203).send('<h1>Equipo creado con éxito</h1>');
+  const newTeam = req.body;
+  newTeam.area = { id: 2072, name: 'England' };
+  newTeam.lastUpdated = new Date();
+
+  const teams = getTeams(teamsPath);
+  saveTeam(newTeam, teamsPath, teams);
+  // fix names in form
+  res.status(201).send('<h1>Equipo creado con éxito</h1>');
 });
 module.exports = crudRoutes;
