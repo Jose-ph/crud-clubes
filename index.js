@@ -15,10 +15,4 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use('/', routes);
 
-// app.get('/', (req, res) => {
-//   res.render('home', {
-//     layout: 'main',
-//   });
-// });
-
 app.listen(PORT);

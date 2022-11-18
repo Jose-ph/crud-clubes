@@ -17,7 +17,11 @@
     {{#each data.teams as |team|}}
         <tr>
       <th scope="row"id={{team.id}}>{{team.id}}</th>
-      <td>{{team.crestUrl}}/// {{team.name}}</td>
+      <td> <img src="{{team.crestUrl}}" alt="{{team.name}} logo">
+        ///
+         {{team.name}}
+
+      </td>
       <td>{{team.area.name}}</td>
       <td> <button class="btn btn-warning">Ver</button>
      <button  class="btn btn-warning">Editar</button>
