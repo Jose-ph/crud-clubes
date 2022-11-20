@@ -318,35 +318,5 @@
     "clubColors": "Red / Black",
     "venue": "Vitality Stadium",
     "lastUpdated": "2020-05-14T02:43:14Z"
-  },
-  {
-    "id": "2022",
-    "name": "Selecciòn Argentina",
-    "shortName": "Scaloneta",
-    "tla": "nosequeeslatla",
-    "address": "ezeiza 1010",
-    "phone": "1155223366",
-    "website": "scaloneta.com",
-    "email": "scaloneta@hotmail.com",
-    "founded": "2022-11-15",
-    "clubColors": "celeste y blanco",
-    "venue": "scaloneta stadium",
-    "area": { "id": 2072, "name": "England" },
-    "lastUpdated": "2022-11-16T14:03:45.246Z"
-  },
-  {
-    "id": "2022",
-    "name": "Selecciòn Argentina",
-    "shortName": "scaloneta",
-    "tla": "scalonetatla",
-    "address": "ezeiza 1010",
-    "phone": "1122334455",
-    "website": "scaloneta.com",
-    "email": "scaloneta@hotmail.com",
-    "founded": "2022-11-17",
-    "clubColors": "celeste y blanco",
-    "venue": "scaloneta stadium",
-    "area": { "id": 2072, "name": "England" },
-    "lastUpdated": "2022-11-18T13:18:51.446Z"
   }
 ]

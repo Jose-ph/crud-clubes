@@ -7,8 +7,8 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 const teamsPath = './data/equipos.json';
-function getTeams(path) {
-  const teamsData = fs.readFileSync(path);
+function getTeams(path, fileSystemFunction) {
+  const teamsData = fileSystemFunction(path);
   return JSON.parse(teamsData);
 }
 function addTeam(newTeam, path, teams, callBackAdd) {
@@ -19,22 +19,28 @@ function addTeam(newTeam, path, teams, callBackAdd) {
   callBackAdd(path, stringifyData);
   // fs.writeFileSync(path, stringifyData);
 }
-function saveTeams(teams, path, saveMethod) {
+function saveTeams(teams, path, callBackSave) {
   const stringifyData = JSON.stringify(teams);
 
-  saveMethod(path, stringifyData);
-  // callBackSave(path, stringifyData);
+  callBackSave(path, stringifyData);
 }
 function deleteTeamById(id, teams) {
   // ID must be unique
   // use truthy or change new teams ids to number
-  const filteredTeams = teams.filter((team) => team.id != id);
+  const $teams = teams.map((element) => ({ ...element }));
 
-  return filteredTeams;
+  const index = $teams.findIndex((team) => team.id == id);
+  if (index > -1) {
+    $teams.splice(index, 1);
+
+    return $teams;
+  }
+  const message = 'No se pudo borrar';
+  return message;
 }
 
 crudRoutes.get('/', (req, res) => {
-  const teams = getTeams(teamsPath);
+  const teams = getTeams(teamsPath, fs.readFileSync);
 
   res.render('teams', {
     layout: 'main',
@@ -74,4 +80,14 @@ crudRoutes.delete('/teams/delete/:id', (req, res) => {
   saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
   res.status(200).send('<h1>Equipo ELIMINADO con éxito</h1>');
 });
+crudRoutes.put('/teams/update/:id', (req, res) => {
+  const teamToBeUpdatedId = req.params.id;
+  const teams = getTeams(teamsPath);
+  const index = teams.findIndex((team) => team.id == teamToBeUpdatedId);
+  teams[index] = req.body;
+  res.status(200).send('<h1>Equipo modificado con éxito</h1>');
+});
 module.exports = crudRoutes;
+// make ID uniques
+// change ids to number
+// add try-catch
