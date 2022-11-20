@@ -7,10 +7,11 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 const teamsPath = './data/equipos.json';
-function getTeams(path, fileSystemFunction) {
-  const teamsData = fileSystemFunction(path);
+function getTeams(path, fileSystemGetFunction) {
+  const teamsData = fileSystemGetFunction(path);
   return JSON.parse(teamsData);
 }
+// this function changes the original teams array
 function addTeam(newTeam, path, teams, callBackAdd) {
   teams.push(newTeam);
   const newTeams = teams;
@@ -19,10 +20,11 @@ function addTeam(newTeam, path, teams, callBackAdd) {
   callBackAdd(path, stringifyData);
   // fs.writeFileSync(path, stringifyData);
 }
-function saveTeams(teams, path, callBackSave) {
+
+function saveTeams(teams, path, fileSystemWriteFunction) {
   const stringifyData = JSON.stringify(teams);
 
-  callBackSave(path, stringifyData);
+  fileSystemWriteFunction(path, stringifyData);
 }
 function deleteTeamById(id, teams) {
   // ID must be unique
@@ -35,8 +37,8 @@ function deleteTeamById(id, teams) {
 
     return $teams;
   }
-  const message = 'No se pudo borrar';
-  return message;
+
+  return false;
 }
 
 crudRoutes.get('/', (req, res) => {
@@ -72,13 +74,17 @@ crudRoutes.post('/teams/addteam', upload.single('crestUrl'), (req, res) => {
   res.status(201).send('<h1>Equipo creado con éxito</h1>');
 });
 crudRoutes.delete('/teams/delete/:id', (req, res) => {
-  const teams = getTeams(teamsPath);
+  const teams = getTeams(teamsPath, fs.readFileSync);
   const teamId = req.params.id;
-
   const modifiedTeams = deleteTeamById(teamId, teams);
 
-  saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
-  res.status(200).send('<h1>Equipo ELIMINADO con éxito</h1>');
+  if (modifiedTeams !== false) {
+    saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
+    res.status(200).send('<h1>Equipo ELIMINADO con éxito</h1>');
+  } else {
+    res.status(409).send('<h1>No se pudo eliminar el equipo ID inexistente </h1>');
+  }
+  // saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
 });
 crudRoutes.put('/teams/update/:id', (req, res) => {
   const teamToBeUpdatedId = req.params.id;
