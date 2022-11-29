@@ -7,8 +7,13 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 const teamsPath = './data/equipos.json';
-function getTeams(path, fileSystemGetFunction) {
-  const teamsData = fileSystemGetFunction(path);
+function getTeamById(id, teams) {
+  const index = teams.findIndex((team) => team.id === id);
+  const team = teams[index];
+  return team;
+}
+function getTeams(path, fileSystemReadFunction) {
+  const teamsData = fileSystemReadFunction(path);
   return JSON.parse(teamsData);
 }
 // WARNING this function changes the  teams array
@@ -63,6 +68,18 @@ crudRoutes.get('/teams/addteam', (req, res) => {
   res.status(200);
   res.type('.html');
 });
+crudRoutes.get('/teams/:id', (req, res) => {
+  const teamId = Number(req.params.id);
+  const teams = getTeams(teamsPath, fs.readFileSync);
+  const teamDetail = getTeamById(teamId, teams);
+  console.log(teamDetail);
+  res.render('teamDetail', {
+    layout: 'main',
+    data: {
+      teamDetail,
+    },
+  });
+});
 crudRoutes.post('/teams/addteam', upload.single('crestUrl'), (req, res) => {
   const newTeam = req.body;
   newTeam.area = { id: 2072, name: 'England' };
@@ -86,9 +103,9 @@ crudRoutes.delete('/teams/delete/:id', (req, res) => {
 
   if (modifiedTeams !== false) {
     saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
-    res.status(200).send('<h1>Equipo ELIMINADO con éxito</h1>');
+    res.status(200).type('.html').send('<h1>Equipo ELIMINADO con éxito</h1>');
   } else {
-    res.status(409).send('<h1>No se pudo eliminar el equipo ID inexistente </h1>');
+    res.status(409).type('.html').send('<h1>No se pudo eliminar el equipo ID inexistente </h1>');
   }
   // saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
 });
