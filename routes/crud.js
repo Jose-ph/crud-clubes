@@ -11,13 +11,13 @@ function getTeams(path, fileSystemGetFunction) {
   const teamsData = fileSystemGetFunction(path);
   return JSON.parse(teamsData);
 }
-// this function changes the original teams array
-function addTeam(newTeam, path, teams, callBackAdd) {
+// WARNING this function changes the  teams array
+function addTeam(newTeam, path, teams, fileSystemWriteFunction) {
   teams.push(newTeam);
   const newTeams = teams;
   const stringifyData = JSON.stringify(newTeams);
 
-  callBackAdd(path, stringifyData);
+  fileSystemWriteFunction(path, stringifyData);
   // fs.writeFileSync(path, stringifyData);
 }
 
@@ -28,10 +28,10 @@ function saveTeams(teams, path, fileSystemWriteFunction) {
 }
 function deleteTeamById(id, teams) {
   // ID must be unique
-  // use truthy or change new teams ids to number
+
   const $teams = teams.map((element) => ({ ...element }));
 
-  const index = $teams.findIndex((team) => team.id == id);
+  const index = $teams.findIndex((team) => team.id === id);
   if (index > -1) {
     $teams.splice(index, 1);
 
@@ -52,12 +52,16 @@ crudRoutes.get('/', (req, res) => {
 
     },
   });
+  res.status(200);
+  res.type('.html');
 });
 
 crudRoutes.get('/teams/addteam', (req, res) => {
   res.render('createteamform', {
     layout: 'main',
   });
+  res.status(200);
+  res.type('.html');
 });
 crudRoutes.post('/teams/addteam', upload.single('crestUrl'), (req, res) => {
   const newTeam = req.body;
@@ -65,13 +69,15 @@ crudRoutes.post('/teams/addteam', upload.single('crestUrl'), (req, res) => {
   newTeam.lastUpdated = new Date();
   // newTeam.crestUrl = req.file.path;
   // Fix upload path not working in html
-  const { path } = req.file;
-  console.log(path);
+  // const { path } = req.file;
+  // console.log(path);
+  // ADD id check function
+  newTeam.id = Number(req.body.id);
 
-  const teams = getTeams(teamsPath);
+  const teams = getTeams(teamsPath, fs.readFileSync);
   addTeam(newTeam, teamsPath, teams, fs.writeFileSync);
 
-  res.status(201).send('<h1>Equipo creado con éxito</h1>');
+  res.status(201).type('.html').send('<h1>Equipo creado con éxito</h1>');
 });
 crudRoutes.delete('/teams/delete/:id', (req, res) => {
   const teams = getTeams(teamsPath, fs.readFileSync);
@@ -89,11 +95,11 @@ crudRoutes.delete('/teams/delete/:id', (req, res) => {
 crudRoutes.put('/teams/update/:id', (req, res) => {
   const teamToBeUpdatedId = req.params.id;
   const teams = getTeams(teamsPath);
-  const index = teams.findIndex((team) => team.id == teamToBeUpdatedId);
+  const index = teams.findIndex((team) => team.id === teamToBeUpdatedId);
   teams[index] = req.body;
   res.status(200).send('<h1>Equipo modificado con éxito</h1>');
 });
 module.exports = crudRoutes;
 // make ID uniques
-// change ids to number
+
 // add try-catch

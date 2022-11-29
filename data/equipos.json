@@ -318,5 +318,60 @@
     "clubColors": "Red / Black",
     "venue": "Vitality Stadium",
     "lastUpdated": "2020-05-14T02:43:14Z"
+  },
+  {
+    "id": "2022",
+    "team name": "Seleccion Argentina",
+    "shortname": "Scaloneta",
+    "tla": "scaloneta tla",
+    "crestUrl": "subirimagenconmulter",
+    "Team address": "watar 2020",
+    "team phone": "112233455",
+    "area": { "id": 2072, "name": "England" },
+    "lastUpdated": "2022-11-29T02:19:33.911Z"
+  },
+  {
+    "id": "2022",
+    "team name": "Seleccion Argentina",
+    "shortname": "Scaloneta",
+    "tla": "scaloneta tla",
+    "crestUrl": "subirimagenconmulter",
+    "Team address": "watar 2020",
+    "team phone": "112233455",
+    "area": { "id": 2072, "name": "England" },
+    "lastUpdated": "2022-11-29T02:20:24.923Z"
+  },
+  {
+    "id": "2022",
+    "team name": "Seleccion Argentina",
+    "shortname": "Scaloneta",
+    "tla": "scaloneta tla",
+    "crestUrl": "subirimagenconmulter",
+    "Team address": "watar 2020",
+    "team phone": "112233455",
+    "area": { "id": 2072, "name": "England" },
+    "lastUpdated": "2022-11-29T02:21:32.175Z"
+  },
+  {
+    "id": "2023",
+    "team name": "Seleccion Argentina",
+    "shortname": "Scaloneta",
+    "tla": "scaloneta tla",
+    "crestUrl": "subirimagenconmulter",
+    "Team address": "watar 2020",
+    "team phone": "112233455",
+    "area": { "id": 2072, "name": "England" },
+    "lastUpdated": "2022-11-29T02:22:00.878Z"
+  },
+  {
+    "id": 2024,
+    "team name": "Seleccion Argentina",
+    "shortname": "Scaloneta",
+    "tla": "scaloneta tla",
+    "crestUrl": "subirimagenconmulter",
+    "Team address": "watar 2020",
+    "team phone": "112233455",
+    "area": { "id": 2072, "name": "England" },
+    "lastUpdated": "2022-11-29T02:23:32.852Z"
   }
 ]
