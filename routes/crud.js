@@ -72,7 +72,7 @@ crudRoutes.get('/teams/:id', (req, res) => {
   const teamId = Number(req.params.id);
   const teams = getTeams(teamsPath, fs.readFileSync);
   const teamDetail = getTeamById(teamId, teams);
-  console.log(teamDetail);
+
   res.render('teamDetail', {
     layout: 'main',
     data: {

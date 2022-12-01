@@ -1,13 +1,43 @@
 <h1>{{data.teamDetail.name}}</h1>
 <img src="{{data.teamDetail.crestUrl}}" alt="{{data.teamDetail.name}} logo">
 
-<iframe
-  width="600"
-  height="450"
-  style="border:0"
-  loading="lazy"
-  allowfullscreen
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key=API_KEY
-    &q=Villa Park Birmingham B6 6HE">
-</iframe>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"># {{data.teamDetail.id}}  </th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Nombre: {{data.teamDetail.name}}</td>
+     
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Telefono: {{data.teamDetail.phone}}</td>
+     
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td >Dirección: {{data.teamDetail.address}} </td>
+      
+    </tr>
+      <tr>
+      <th scope="row">4</th>
+      <td >Modificado: {{data.teamDetail.lastUpdated}} </td>
+      
+    </tr>
+     <tr>
+      <th scope="row">5</th>
+      <td >website: {{data.teamDetail.website}} </td>
+      
+    </tr>
+     <tr>
+      <th scope="row"></th>
+      <td >Fundado: {{data.teamDetail.founded}} </td>
+      
+    </tr>
+  </tbody>
+</table>
