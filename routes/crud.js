@@ -48,12 +48,13 @@ function deleteTeamById(id, teams) {
 
 crudRoutes.get('/', (req, res) => {
   const teams = getTeams(teamsPath, fs.readFileSync);
-
+  const deleteControl = () => { console.log('seguro?'); };
   res.render('teams', {
     layout: 'main',
     data: {
       teams,
       teamsQuantity: teams.length,
+      deleteControl,
 
     },
   });
@@ -96,10 +97,33 @@ crudRoutes.post('/teams/addteam', upload.single('crestUrl'), (req, res) => {
 
   res.status(201).type('.html').send('<h1>Equipo creado con éxito</h1>');
 });
-crudRoutes.delete('/teams/delete/:id', (req, res) => {
+// crudRoutes.delete('/teams/delete/:id', (req, res) => {
+//   const teams = getTeams(teamsPath, fs.readFileSync);
+//   const teamId = req.params.id;
+//   const modifiedTeams = deleteTeamById(teamId, teams);
+
+//   if (modifiedTeams !== false) {
+//     saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
+//     res.status(200).type('.html').send('<h1>Equipo ELIMINADO con éxito</h1>');
+//   } else {
+//     res.status(409).type('.html').send('<h1>No se pudo eliminar el equipo ID inexistente </h1>');
+//   }
+//    saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
+// });
+crudRoutes.put('/teams/update/:id', (req, res) => {
+  const teamToBeUpdatedId = req.params.id;
+  const teams = getTeams(teamsPath);
+  const index = teams.findIndex((team) => team.id === teamToBeUpdatedId);
+  teams[index] = req.body;
+  res.status(200).send('<h1>Equipo modificado con éxito</h1>');
+});
+
+crudRoutes.get('/teams/delete/:id', (req, res) => {
   const teams = getTeams(teamsPath, fs.readFileSync);
-  const teamId = req.params.id;
+  const teamId = Number(req.params.id);
   const modifiedTeams = deleteTeamById(teamId, teams);
+  console.log(teamId);
+  console.log(modifiedTeams);
 
   if (modifiedTeams !== false) {
     saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
@@ -109,14 +133,7 @@ crudRoutes.delete('/teams/delete/:id', (req, res) => {
   }
   // saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
 });
-crudRoutes.put('/teams/update/:id', (req, res) => {
-  const teamToBeUpdatedId = req.params.id;
-  const teams = getTeams(teamsPath);
-  const index = teams.findIndex((team) => team.id === teamToBeUpdatedId);
-  teams[index] = req.body;
-  res.status(200).send('<h1>Equipo modificado con éxito</h1>');
-});
+
 module.exports = crudRoutes;
-// make ID uniques
 
 // add try-catch
