@@ -1,10 +1,19 @@
-<h1>Equipos de la Premier League</h1>
-{{!-- {{#each data.teams as |team|}}
-<li>Team: {{team.name}}</li>
-{{/each}} --}}
+<style>
+  #addTeam{
+    width:15% ;
+    margin-bottom: 2%;
+
+  }
+</style>
+<div class="container">
+  <div class="container d-flex flex-column">
+    <h1 class="align-self-center" >Equipos de la Premier League</h1>
+
 <h3> Total equipos: {{data.teamsQuantity}} </h3>
-<button class="btn btn-success" onclick="window.location.href='http://localhost:8080/teams/addteam'">Agregar
+<button id="addTeam"class="btn btn-success" onclick="window.location.href='http://localhost:8080/teams/addteam'">Agregar
   Equipo</button>
+
+  </div>
 
 <table class="table table-dark">
   <thead>
@@ -27,10 +36,10 @@
       <td>{{team.area.name}}</td>
       <td> <button onclick=window.location.href='http://localhost:8080/teams/{{team.id}}'
           class="btn btn-warning">Ver</button>
-        <button class="btn btn-warning">Editar</button>
-        {{!-- <button class="btn btn-warning">Eliminar</button> --}}
+        <button onclick=window.location.href='http://localhost:8080/teams/update/{{team.id}}' class="btn btn-warning">Editar</button>
+       
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{team.id}}">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{team.id}}">
           Eliminar
         </button>
         <!-- Modal -->
@@ -68,3 +77,4 @@
 
   </tbody>
 </table>
+</div>

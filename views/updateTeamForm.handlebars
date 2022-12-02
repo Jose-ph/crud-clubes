@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>Por favor, completa los datos del nuevo equipo</h1>
+
+<form action="/teams/update/:id" method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="id" class="form-label">ID:</label>
+    <input type="number" class="form-control" id="id" name="id" value={{data.teamToBeUpdated.id}} >
+   
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Team name:</label>
+    <input type="text" class="form-control" id="name" name="name" value=" {{data.teamToBeUpdated.name}}">
+  </div>
+   <div class="mb-3">
+    <label for="team-name-short" class="form-label">shortName:</label>
+    <input type="text" class="form-control" id="team-name-short" value="{{data.teamToBeUpdated.shortName}}" name="shortName">
+  </div>
+    <div class="mb-3">
+    <label for="team-tla" class="form-label">tla:</label>
+    <input type="text" class="form-control" id="team-tla" value="{{data.teamToBeUpdated.tla}}" name="tla">
+  </div>
+     <div class="mb-3">
+    <label for="image" class="form-label">SUBIR IMAGEN</label>
+    <input type="file" class="form-control" id="image" name="crestUrl">
+  </div>
+     <div class="mb-3">
+    <label for="team-address" class="form-label">Team Address:</label>
+    <input type="text" class="form-control" id="team-address" value="{{data.teamToBeUpdated.address}} " name="address">
+  </div>
+     <div class="mb-3">
+    <label for="team-phone" class="form-label">Team Phone:</label>
+    <input type="number" class="form-control" id="team-phone" value="{{data.teamToBeUpdated.phone}}" name="phone">
+  </div>
+    <div class="mb-3">
+    <label for="team-website" class="form-label">Team website:</label>
+    <input type="text" class="form-control" id="team-website" value="{{data.teamToBeUpdated.website}}" name="website">
+  </div>
+  <div class="mb-3">
+    <label for="team-email" class="form-label">Team email:</label>
+    <input type="email" class="form-control" id="team-email" value="{{data.teamToBeUpdated.email}}" name="email">
+  </div>
+  <div class="mb-3">
+    <label for="team-founded-date" class="form-label">Team founded:</label>
+    <input type="date" class="form-control" id="team-founded-date" value="{{data.teamToBeUpdated.founded}}" name="founded">
+  </div>
+   <div class="mb-3">
+    <label for="team-colors" class="form-label">Team colors:</label>
+    <input type="text" class="form-control" id="team-colors" value="{{data.teamToBeUpdated.clubColors}}" name="clubColors">
+  </div>
+   <div class="mb-3">
+    <label for="team-venue" class="form-label">Team venue:</label>
+    <input type="text" class="form-control" id="team-venue" value="{{data.teamToBeUpdated.venue}}" name="venue">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>

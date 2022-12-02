@@ -110,14 +110,33 @@ crudRoutes.post('/teams/addteam', upload.single('crestUrl'), (req, res) => {
 //   }
 //    saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
 // });
-crudRoutes.put('/teams/update/:id', (req, res) => {
+// crudRoutes.put('/teams/update/:id', (req, res) => {
+//   const teamToBeUpdatedId = req.params.id;
+//   const teams = getTeams(teamsPath);
+//   const index = teams.findIndex((team) => team.id === teamToBeUpdatedId);
+//   teams[index] = req.body;
+//   res.status(200).send('<h1>Equipo modificado con éxito</h1>');
+// });
+crudRoutes.get('/teams/update/:id', (req, res) => {
+  const teamToBeUpdatedId = Number(req.params.id);
+  const teams = getTeams(teamsPath, fs.readFileSync);
+  const index = teams.findIndex((team) => team.id === teamToBeUpdatedId);
+  const teamToBeUpdated = teams[index];
+  console.log(teamToBeUpdated);
+  res.render('updateTeamForm', {
+    layout: 'main',
+    data: { teamToBeUpdated },
+  });
+  res.status(200);
+});
+crudRoutes.post('/teams/update/:id', upload.single('crestUrl'), (req, res) => {
   const teamToBeUpdatedId = req.params.id;
-  const teams = getTeams(teamsPath);
+  const teams = getTeams(teamsPath, fs.readFileSync);
   const index = teams.findIndex((team) => team.id === teamToBeUpdatedId);
   teams[index] = req.body;
+  console.log(req.body.crestUrl);
   res.status(200).send('<h1>Equipo modificado con éxito</h1>');
 });
-
 crudRoutes.get('/teams/delete/:id', (req, res) => {
   const teams = getTeams(teamsPath, fs.readFileSync);
   const teamId = Number(req.params.id);
@@ -137,3 +156,4 @@ crudRoutes.get('/teams/delete/:id', (req, res) => {
 module.exports = crudRoutes;
 
 // add try-catch
+// add basic form control, now I can create an empty team
