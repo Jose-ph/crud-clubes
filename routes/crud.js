@@ -18,14 +18,14 @@ function getTeams(path, fileSystemReadFunction) {
 
   return JSON.parse(teamsData);
 }
-// WARNING this function changes the  teams array
+
 function addTeam(newTeam, path, teams, fileSystemWriteFunction) {
+  // WARNING this function changes the  teams array
   teams.push(newTeam);
   const newTeams = teams;
   const stringifyData = JSON.stringify(newTeams);
 
   fileSystemWriteFunction(path, stringifyData);
-  // fs.writeFileSync(path, stringifyData);
 }
 
 function saveTeams(teams, path, fileSystemWriteFunction) {
@@ -157,11 +157,16 @@ crudRoutes.get('/teams/update/:id', (req, res) => {
 });
 crudRoutes.post('/teams/update/:id', upload.single('crestUrl'), (req, res) => {
   try {
-    const teamToBeUpdatedId = req.params.id;
+    const teamToBeUpdatedId = Number(req.params.id);
     const teams = getTeams(teamsPath, fs.readFileSync);
     const index = teams.findIndex((team) => team.id === teamToBeUpdatedId);
     teams[index] = req.body;
-    console.log(req.body.crestUrl);
+    teams[index].area = { id: 2072, name: 'England' };
+    teams[index].lastUpdated = new Date();
+    teams[index].crestUrl = req.file.filename;
+    teams[index].id = Number(req.body.id);
+
+    saveTeams(teams, teamsPath, fs.writeFileSync);
     res.status(200).send('<h1>Equipo modificado con éxito</h1>');
   } catch (error) {
     console.log(error);
@@ -189,8 +194,8 @@ crudRoutes.get('/teams/delete/:id', (req, res) => {
 });
 
 module.exports = crudRoutes;
+// Add the ID check function
 
-// add basic form control, now I can create an empty team
 // add bonus point with google maps
 // TESTS
 

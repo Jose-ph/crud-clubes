@@ -1,10 +1,10 @@
 <div class="container">
-  <h1>Por favor, completa los datos del nuevo equipo</h1>
+  <h1>Por favor, completa los datos para actualizar</h1>
 
-<form action="/teams/update/:id" method="post" enctype="multipart/form-data">
+<form action="/teams/update/{{data.teamToBeUpdated.id}}" method="post" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="id" class="form-label">ID:</label>
-    <input type="number" class="form-control" id="id" name="id" value={{data.teamToBeUpdated.id}} >
+    <input type="number" class="form-control" id="id" name="id" value={{data.teamToBeUpdated.id}} required>
    
   </div>
   <div class="mb-3">
@@ -21,7 +21,7 @@
   </div>
      <div class="mb-3">
     <label for="image" class="form-label">SUBIR IMAGEN</label>
-    <input type="file" class="form-control" id="image" name="crestUrl">
+    <input type="file" class="form-control" id="image" name="crestUrl" required>
   </div>
      <div class="mb-3">
     <label for="team-address" class="form-label">Team Address:</label>
