@@ -1,7 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-// const fs = require('fs');
-// const multer = require('multer');
+
 const routes = require('./routes/routes');
 
 const PORT = 8080;
