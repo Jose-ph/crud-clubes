@@ -196,26 +196,20 @@ crudRoutes.get('/teams/delete/:id', (req, res) => {
 module.exports = crudRoutes;
 // Add the ID check function
 
-// add bonus point with google maps
 // TESTS
 
-// crudRoutes.delete('/teams/delete/:id', (req, res) => {
-//   const teams = getTeams(teamsPath, fs.readFileSync);
-//   const teamId = req.params.id;
-//   const modifiedTeams = deleteTeamById(teamId, teams);
+// Idea from an article to write code
 
-//   if (modifiedTeams !== false) {
-//     saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
-//     res.status(200).type('.html').send('<h1>Equipo ELIMINADO con éxito</h1>');
-//   } else {
-//     res.status(409).type('.html').send('<h1>No se pudo eliminar el equipo ID inexistente </h1>');
-//   }
-//    saveTeams(modifiedTeams, teamsPath, fs.writeFileSync);
+// Express follows a basic structure for responding to requests based on a route signature, i.e.;
+
+// app.get('/users/report', function(req, res) {
+//     res.render('userreport', { title: 'Users Report' });
 // });
-// crudRoutes.put('/teams/update/:id', (req, res) => {
-//   const teamToBeUpdatedId = req.params.id;
-//   const teams = getTeams(teamsPath);
-//   const index = teams.findIndex((team) => team.id === teamToBeUpdatedId);
-//   teams[index] = req.body;
-//   res.status(200).send('<h1>Equipo modificado con éxito</h1>');
-// });
+// It is a good practice to break the handler code into its own function
+// , and then use that handler in the route.
+
+// function userReportHandler(req, res) {
+//     res.render('userreport', { title: 'Users Report' });
+// }
+
+// app.get('/users/report', userReportHandler);

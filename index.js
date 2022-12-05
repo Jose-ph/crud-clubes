@@ -14,4 +14,5 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use('/', routes);
 
-app.listen(PORT);
+const server = app.listen(PORT);
+module.exports = { app, server };
