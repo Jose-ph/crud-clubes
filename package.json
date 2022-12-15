@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
+    "test:simple": "jest",
+    "test:handlers":"jest --detectOpenHandles",
     "test:cover":"jest --collect-coverage",
     "dev:express": "nodemon index.js"
   },

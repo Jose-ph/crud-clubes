@@ -5,6 +5,7 @@ const config = {
   coverageDirectory: 'coverage',
   testPathIgnorePatterns: ['/node_modules/'],
   coveragePathIgnorePatterns: ['/node_modules/'],
+  testEnvironment: 'node',
 };
 
 module.exports = config;

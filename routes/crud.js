@@ -60,6 +60,7 @@ crudRoutes.get('/', (req, res) => {
 
       },
     });
+
     res.status(200);
     res.type('.html');
   } catch (error) {
@@ -191,6 +192,11 @@ crudRoutes.get('/teams/delete/:id', (req, res) => {
     console.log(error);
     res.status(500).type('.html').send(`<h1>Error ${error}</h1>`);
   }
+});
+
+crudRoutes.get('*', (req, res) => {
+  res.status(404);
+  res.send('INVALID ROUTE');
 });
 
 module.exports = crudRoutes;
