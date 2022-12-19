@@ -10,3 +10,15 @@ describe('GET teams', () => {
     expect(res.type).toBe('text/html');
   });
 });
+describe('GET a team by ID', () => {
+  test('get team with ID = 57', async () => {
+    const res = await request(app).get('/teams/57');
+
+    expect(res.statusCode).toBe(200);
+  });
+  test('not get a team with invalid ID', async () => {
+    const res = await request(app).get('/teams/57K9');
+
+    expect(res.statusCode).toBe(404);
+  });
+});

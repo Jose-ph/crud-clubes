@@ -34,8 +34,6 @@ function saveTeams(teams, path, fileSystemWriteFunction) {
   fileSystemWriteFunction(path, stringifyData);
 }
 function deleteTeamById(id, teams) {
-  // ID must be unique
-
   const $teams = teams.map((element) => ({ ...element }));
 
   const index = $teams.findIndex((team) => team.id === id);
@@ -45,6 +43,18 @@ function deleteTeamById(id, teams) {
     return $teams;
   }
 
+  return false;
+}
+function checkId(id, teams) {
+  const idList = [];
+  teams.forEach((team) => {
+    idList.push(team.id);
+  });
+
+  const index = teams.findIndex((team) => team.id === id);
+  if (index > -1) {
+    return true;
+  }
   return false;
 }
 
@@ -98,15 +108,30 @@ crudRoutes.get('/teams/addteam', (req, res) => {
 crudRoutes.get('/teams/:id', (req, res) => {
   try {
     const teamId = Number(req.params.id);
-    const teams = getTeams(teamsPath, fs.readFileSync);
-    const teamDetail = getTeamById(teamId, teams);
 
-    res.render('teamDetail', {
-      layout: 'main',
-      data: {
-        teamDetail,
-      },
-    });
+    const teams = getTeams(teamsPath, fs.readFileSync);
+    const idExists = checkId(teamId, teams);
+
+    if (idExists) {
+      const teamDetail = getTeamById(teamId, teams);
+
+      res.render('teamDetail', {
+        layout: 'main',
+        data: {
+          teamDetail,
+        },
+      });
+    } else {
+      res.render('errorMessage', {
+        layout: 'main',
+        data: {
+          errorMessage: 'Invalid ID',
+
+        },
+      });
+      res.status(404);
+      res.type('.html');
+    }
   } catch (error) {
     res.render('errorMessage', {
       layout: 'main',
