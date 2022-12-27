@@ -3,6 +3,14 @@
 const request = require('supertest');
 const app = require('../app');
 
+describe('GET teams catch error test', () => {
+  test('should display error message', async () => {
+    jest.mock('supertest');
+    const res = request.get.mockResolvedValue(undefined);
+    expect(res.statusCode).toBe(404);
+  });
+});
+
 describe('GET teams', () => {
   it('should get all teams', async () => {
     const res = await request(app).get('/');
